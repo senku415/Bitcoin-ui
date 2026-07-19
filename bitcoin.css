@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Added a dark background to make the glow effects pop like the image */
+    background: #0d131a;
+}
+
+.container {
+    display: grid;
+    /* Desktop default: 2 columns, each exactly 220px wide */
+    grid-template-columns: repeat(2, 220px);
+    gap: 25px;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    /* Prevents cards from touching screen edges on small displays */
+    width: 100%;
+}
+
+
+.card {
+    position: relative;
+    height: 220px;
+    border-radius: 40px;
+    color: white;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
+
+/* Makes the bottom blue card stretch across both grid columns */
+.large {
+    grid-column: span 2;
+    width: 100%;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.icon {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin: 30px;
+    backdrop-filter: blur(10px);
+    /* Soft white border around the icon circle */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.card h2 {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    font-size: 34px;
+    font-weight: 500;
+}
+
+/* --- Color & Glow Adjustments --- */
+
+.purple {
+    border: 1px solid rgba(178, 122, 253, 0.4);
+    background: radial-gradient(circle at center, rgba(140, 115, 232, 0.85), rgba(100, 85, 185, 0.7) 100%);
+    box-shadow: 0 15px 45px rgba(140, 115, 232, 0.3);
+}
+
+.green {
+    border: 1px solid rgba(5, 249, 176, 0.4);
+    background: radial-gradient(circle at center, rgba(46, 204, 143, 0.95), rgba(28, 143, 98, 0.8) 100%);
+    box-shadow: 0 15px 45px rgba(46, 204, 143, 0.3);
+}
+
+.blue {
+    border: 1px solid rgba(19, 103, 220, 0.4);
+    background: radial-gradient(circle at center, rgba(13, 110, 253, 0.95), rgba(11, 76, 173, 0.85) 100%);
+    box-shadow: 0 15px 45px rgba(13, 110, 253, 0.4);
+}
+
+/* --- Responsive Breakpoint for Mobile Devices --- */
+@media (max-width: 520px) {
+    .container {
+        /* Switches to a single column that stretches naturally */
+        grid-template-columns: 1fr;
+        max-width: 340px;
+        /* Limits maximum width on mobile so cards don't look awkwardly stretched */
+        margin: 0 auto;
+    }
+
+    .large {
+        /* Resets the blue card to occupy just the single column */
+        grid-column: span 1;
+    }
+
+    .card {
+        /* Slightly lowers the card height on mobile to look cleaner */
+        height: 180px;
+        border-radius: 30px;
+    }
+
+    .card::before {
+        border-radius: 30px;
+    }
+
+    /* Scales down typography and spacing for smaller screens */
+    .card h2 {
+        font-size: 28px;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .icon {
+        width: 55px;
+        height: 55px;
+        margin: 20px;
+        font-size: 24px;
+    }
+}
